@@ -37,12 +37,12 @@ fi
 # 啟動 Docker Compose
 docker-compose -p php-quick-laravel-local up -d
 
-# 執行數據庫遷移
-php artisan migrate:fresh --seed
-
 # Run tests with coverage
 XDEBUG_MODE=coverage php artisan test --coverage
 #XDEBUG_MODE=coverage php artisan test --coverage-html=coverage-report
+
+# 執行數據庫遷移
+php artisan migrate:fresh --seed
 
 # 提示開發者可以訪問 localhost:8080
 echo "開發環境已啟動，您可以訪問 http://localhost:8080, http://localhost:8080/api/rawSQL, http://localhost:8080/api/phpinfo"
