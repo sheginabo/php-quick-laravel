@@ -2,7 +2,7 @@
 
 echo "當前執行目錄: $(pwd)"
 # 構建 Docker 映像
-docker build -f ./Docker.phpfpm.local -t phpfpm-local .
+docker build -f ./Dockerfile.phpfpm.local -t phpfpm-local .
 # 檢查 xdebug 是否安裝，若未安裝則安裝它
 if ! php -m | grep -q 'xdebug'; then
   echo "xdebug 未安裝，正在安裝 xdebug"
@@ -15,17 +15,17 @@ else
   echo "xdebug 已安裝"
 fi
 
+# 檢查 vendor 資料夾是否存在，若不存在則執行 composer install
+if [ ! -d "vendor" ]; then
+  echo "Vendor 資料夾不存在，執行 composer install"
+  composer install
+fi
+
 # 檢查 .env 文件是否存在，若不存在則複製 .env.example 並生成應用密鑰
 if [ ! -f ".env" ]; then
   echo ".env 文件不存在，複製 .env.example 並生成應用密鑰"
   cp .env.example .env
   php artisan key:generate
-fi
-
-# 檢查 vendor 資料夾是否存在，若不存在則執行 composer install
-if [ ! -d "vendor" ]; then
-  echo "Vendor 資料夾不存在，執行 composer install"
-  composer install
 fi
 
 # 檢查 DB 檔案
