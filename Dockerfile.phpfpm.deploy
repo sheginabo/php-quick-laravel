@@ -46,9 +46,7 @@ COPY . /var/www
 # Set permissions
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache /var/www/database  \
     && chmod -R 775 /var/www/storage /var/www/bootstrap/cache \
-    && chmod -R 775 /var/www/database \
-    && touch /var/www/database/database.sqlite \
-    && chmod 664 /var/www/database/database.sqlite
+    && chmod -R 775 /var/www/database
 
 # Remove vendor directory and install dependencies
 RUN rm -rf vendor \
@@ -58,6 +56,6 @@ RUN rm -rf vendor \
     && php artisan key:generate \
     && php artisan migrate:fresh --seed
 
-# Expose port 9000 and start PHP-FPM server
-EXPOSE 9000
-CMD ["php-fpm"]
+COPY ./docker/docker-entrypoint.sh /var/www/
+RUN ["chmod", "+x", "/var/www/docker-entrypoint.sh"]
+ENTRYPOINT ["/var/www/docker-entrypoint.sh"]
