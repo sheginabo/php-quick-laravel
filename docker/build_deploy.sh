@@ -7,4 +7,5 @@ docker build -f ./Dockerfile.phpfpm.deploy -t phpfpm-deploy .
 #docker-compose -p php-quick-laravel-deploy up -d
 docker compose -p php-quick-laravel-deploy up --build --force-recreate -d
 # 提示開發者可以訪問 localhost:8080
-echo "開發環境已啟動，您可以訪問 http://localhost:8080"
+echo "部署環境已啟動，您可以訪問 http://localhost:8080, http://localhost:8080/api/rawSQL, http://localhost:8080/api/phpinfo"
+

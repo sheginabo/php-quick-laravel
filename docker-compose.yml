@@ -8,7 +8,6 @@ services:
         networks:
             - laravel
         depends_on:
-#            - db
             - redis
     # local
 #    app:
@@ -18,11 +17,10 @@ services:
 #        volumes:
 #            - .:/var/www
 #            - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
-#        command: ["sh", "-c", "./docker/set_permissions.sh && php-fpm"]
+#        command: ["sh", "-c", "./docker/local_process.sh && php-fpm"]
 #        networks:
 #            - laravel
 #        depends_on:
-#            - db
 #            - redis
 
     web:
@@ -41,20 +39,20 @@ services:
         depends_on:
             - app
 
-    db:
-        image: mysql:8.0
-        container_name: mysql
-        environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: laravel
-            MYSQL_USER: user
-            MYSQL_PASSWORD: password
-        volumes:
-            - dbdata:/var/lib/mysql
-        networks:
-            - laravel
-        ports:
-            - "3306:3306"
+#    db:
+#        image: mysql:8.0
+#        container_name: mysql
+#        environment:
+#            MYSQL_ROOT_PASSWORD: root
+#            MYSQL_DATABASE: laravel
+#            MYSQL_USER: user
+#            MYSQL_PASSWORD: password
+#        volumes:
+#            - dbdata:/var/lib/mysql
+#        networks:
+#            - laravel
+#        ports:
+#            - "3306:3306"
 
     redis:
         image: redis:alpine

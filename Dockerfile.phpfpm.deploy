@@ -45,8 +45,7 @@ COPY . /var/www
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache /var/www/database  \
-    && chmod -R 775 /var/www/storage /var/www/bootstrap/cache \
-    && chmod -R 775 /var/www/database
+    && chmod -R 775 /var/www/storage /var/www/bootstrap/cache /var/www/database
 
 # Remove vendor directory and install dependencies
 RUN cp .env.example .env \
