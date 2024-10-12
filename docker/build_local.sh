@@ -34,11 +34,11 @@ if [ ! -f ./database/database.sqlite ]; then
     touch ./database/database.sqlite
 fi
 
-# 執行數據庫遷移
-php artisan migrate:fresh --seed
-
 # 啟動 Docker Compose
 docker-compose -p php-quick-laravel-local up -d
+
+# 執行數據庫遷移
+php artisan migrate:fresh --seed
 
 # Run tests with coverage
 XDEBUG_MODE=coverage php artisan test --coverage
