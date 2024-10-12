@@ -49,10 +49,10 @@ RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache /var/ww
     && chmod -R 775 /var/www/database
 
 # Remove vendor directory and install dependencies
-RUN rm -rf vendor \
+RUN cp .env.example .env \
+    && rm -rf vendor \
     && composer install --optimize-autoloader \
     && composer clear-cache \
-    && cp .env.example .env \
     && php artisan key:generate \
     && php artisan migrate:fresh --seed
 
