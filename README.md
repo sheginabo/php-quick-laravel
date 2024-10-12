@@ -35,7 +35,7 @@ To run the project locally for debugging purposes, follow these steps:
     ```bash
     ./docker/build_deploy.sh
     ```
-   - 建立一組 Container 將開發完成的專案放進 images (丟 ECR 或是 DockerHub 之前本地檢查有沒有出錯用)
+   - 建立一組 Container 將開發完成的專案放進 images (丟 ECR 或是 DockerHub 之前本地檢查品質)
 4. **位於專案根目錄執行懶人腳本**
     ```bash
     ./docker/build_deploy.sh
