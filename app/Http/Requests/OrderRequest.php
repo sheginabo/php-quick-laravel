@@ -25,23 +25,42 @@ class OrderRequest extends FormRequest
     {
         return [
             'id' => 'required|string',
-            'name' => 'required|string|max:255',
+            'name' => [
+                'required',
+                'regex:/^[A-Z][a-z]*(\s[A-Z][a-z]*)*$/',
+                function ($attribute, $value, $fail) {
+                    $words = preg_split('/\s+/', trim($value));
+                    foreach ($words as $word) {
+                        if (ucfirst($word) !== $word) {
+                            $fail('Name is not capitalized');
+                        }
+                    }
+                },
+            ],
             'address.city' => 'required|string',
             'address.district' => 'required|string',
             'address.street' => 'required|string',
-            'price' => 'required|numeric',
-            'currency' => 'required|in:TWD,USD',
+            'price' => ['required', 'numeric', 'max:2000'],
+            'currency' => ['required', 'in:TWD,USD'],
         ];
     }
 
+    /**
+     * Custom error messages for validation rules.
+     */
     public function messages()
     {
         return [
+            'name.regex' => 'Name contains non-English characters',
             'currency.in' => 'Currency format is wrong',
             'price.numeric' => 'Price format is wrong',
+            'price.max' => 'Price is over 2000',
         ];
     }
 
+    /**
+     * Handle a failed validation attempt.
+     */
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([
@@ -50,10 +69,13 @@ class OrderRequest extends FormRequest
         ], 400));
     }
 
+    /**
+     * Prepare the data for validation.
+     */
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'price' => is_numeric($this->price) ? (integer) $this->price : $this->price,
+            'price' => is_numeric($this->price) ? intval($this->price) : $this->price,
         ]);
     }
 }

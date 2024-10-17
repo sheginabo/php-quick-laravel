@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OrderResource;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use App\Services\OrderService;
 use App\Http\Requests\OrderRequest;
+use Illuminate\Http\JsonResponse;
+
 
 class OrderController extends Controller
 {
@@ -16,7 +18,7 @@ class OrderController extends Controller
     {
         $this->orderService = $orderService;
     }
-    public function transferOrder(OrderRequest $request)
+    public function transferOrder(OrderRequest $request): JsonResponse
     {
         $response = [
             'result' => 'failed',
@@ -24,24 +26,12 @@ class OrderController extends Controller
             'detail' => []
         ];
 
-        // 使用 OrderService 進行進階驗證
-        try {
-            $transferredOrder = $this->orderService->transferOrder($request->all());
-        } catch (\Throwable $e) {
-            $this->handleException($e, $response);
-            return response()->json($response, $e->getCode());
-        }
+        $transferredOrder = $this->orderService->transferOrder($request->validated());
 
         $response['result'] = 'success';
-        $response['transferredOrder'] = $transferredOrder;
+        $response['transferredOrder'] = new OrderResource($transferredOrder);
 
         return response()->json($response);
     }
 
-    private function handleException(\Throwable $e, array &$response): void
-    {
-        if (method_exists($e, 'getTarget')) {
-            $response['detail'][$e->getTarget()][] = $e->getMessage();
-        }
-    }
 }
