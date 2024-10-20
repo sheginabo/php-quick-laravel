@@ -7,8 +7,9 @@
 ## Getting Started
 ### Prerequisites
 
-- [PHP] (Version 8.3 or later)
-- [Docker](https://www.docker.com/get-started)
+- PHP (Version 8.3 or later)
+- Docker
+- K6 (Optional for Load Testing)
 
 ### Running Locally
 
@@ -36,3 +37,8 @@ To run the project locally for debugging purposes, follow these steps:
     ./docker/build_deploy.sh
     ```
 5. **完成會提示可以透過 http://localhost:8080, http://localhost:8080/api/orders 驗證**
+
+6. **壓力測試(need k6 first)**
+    ```bash
+    k6 run ./k6/test.js
+    ```

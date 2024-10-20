@@ -18,7 +18,6 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         //
         $middleware->api(append: [
-            ThrottleRequests::class.':60,1',
             LogExecutionTime::class,
         ]);
 

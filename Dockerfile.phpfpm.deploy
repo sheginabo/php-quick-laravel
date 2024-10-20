@@ -39,6 +39,8 @@ WORKDIR /var/www
 
 # Copy deploy.ini
 COPY ./docker/php/local.ini /usr/local/etc/php/conf.d/local.ini
+# Copy php-fpm.conf
+COPY ./docker/php/www.conf /usr/local/etc/php-fpm.d/www.conf
 
 # Copy application code
 COPY . /var/www
