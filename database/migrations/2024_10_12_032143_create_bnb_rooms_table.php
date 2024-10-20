@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rooms', function (Blueprint $table) {
+        Schema::create('bnb_rooms', function (Blueprint $table) {
             $table->id()->comment('房間ID');
             $table->foreignId('bnb_id')->constrained('bnbs')->comment('所屬旅宿ID');
             $table->string('name', 255)->comment('房間名稱');
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rooms');
+        Schema::dropIfExists('bnb_rooms');
     }
 };

@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Order;
-use App\Models\Room;
+use App\Models\BnbOrder;
+use App\Models\BnbRoom;
 use App\Models\Bnb;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Order>
+ * @extends Factory<BnbOrder>
  */
-class OrderFactory extends Factory
+class BnbOrderFactory extends Factory
 {
-    protected $model = Order::class;
+    protected $model = BnbOrder::class;
     /**
      * Define the model's default state.
      *
@@ -22,7 +22,7 @@ class OrderFactory extends Factory
     {
         return [
             'bnb_id' => Bnb::factory(),
-            'room_id' => Room::factory(),
+            'room_id' => BnbRoom::factory(),
             'currency' => $this->faker->randomElement(['USD', 'TWD']),
             'amount' => $this->faker->numberBetween(100, 3000),
             'check_in_date' => $this->faker->dateTimeBetween('now', '+1 week'),

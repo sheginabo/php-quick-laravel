@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('bnb_orders', function (Blueprint $table) {
             $table->id()->comment('訂單ID');
             $table->foreignId('bnb_id')->constrained('bnbs')->comment('旅宿ID');
-            $table->foreignId('room_id')->constrained('rooms')->comment('房間ID');
+            $table->foreignId('room_id')->constrained('bnb_rooms')->comment('房間ID');
             $table->char('currency', 3)->comment('付款幣別，值為:TWD (台幣), USD (美金), JPY (日圓)');
             $table->integer('amount')->comment('訂單金額');
             $table->date('check_in_date')->comment('入住日');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('bnb_orders');
     }
 };

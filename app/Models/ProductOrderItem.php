@@ -5,16 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Bnb extends Model
+class ProductOrderItem extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'order_id',
+        'order_item_name',
+        'order_item_type',
+        'product_id',
     ];
-
-    public function rooms()
-    {
-        return $this->hasMany(BnbRoom::class);
-    }
 }
