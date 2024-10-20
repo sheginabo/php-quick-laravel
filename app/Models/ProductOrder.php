@@ -10,6 +10,7 @@ class ProductOrder extends Model
     use HasFactory;
 
     protected $fillable = [
+        'order_number',
         'status',
         'currency',
         'type',
@@ -26,4 +27,9 @@ class ProductOrder extends Model
         'user_agent',
         'customer_note',
     ];
+
+    public function orderItems()
+    {
+        return $this->hasMany(ProductOrderItem::class, 'order_id', 'id');
+    }
 }

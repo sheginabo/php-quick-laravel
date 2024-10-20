@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\CheckOrderOwnership;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -19,7 +21,20 @@ return Application::configure(basePath: dirname(__DIR__))
             ThrottleRequests::class.':60,1',
             LogExecutionTime::class,
         ]);
+
+        $middleware->alias([
+            'check.order.ownership' => CheckOrderOwnership::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
+        $exceptions->renderable(function (\Illuminate\Auth\AuthenticationException $e, $request) {
+            if ($request->expectsJson() || $request->is('api/*')) {
+                return response()->json([
+                    'message' => 'Unauthorized',
+                    'status' => 401,
+                    'success' => false
+                ], 401);
+            }
+        });
     })->create();

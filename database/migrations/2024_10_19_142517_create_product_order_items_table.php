@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('product_order_items', function (Blueprint $table) {
-            $table->bigIncrements('order_item_id');
+            $table->bigIncrements('id');
             $table->bigInteger('order_id')->notNullable();
+            $table->unsignedInteger('order_item_quantity')->notNullable();
             $table->text('order_item_name')->notNullable();
             $table->string('order_item_type', 200)->default('');
             $table->bigInteger('product_id')->notNullable();

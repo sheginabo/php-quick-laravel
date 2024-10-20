@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\ProductOrder;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ProductOrderRequest extends FormRequest
+class ProductOrderUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,14 +29,23 @@ class ProductOrderRequest extends FormRequest
             'type' => 'nullable|string|max:20',
             'tax_amount' => 'nullable|numeric',
             'total_amount' => 'required|numeric',
-            'user_id' => 'required|integer',
             'billing_email' => 'nullable|string|email|max:320',
             'payment_method' => 'nullable|string|max:100',
             'payment_method_title' => 'nullable|string',
             'items' => 'required|array',
+            'items.*.id' => 'required|integer',
             'items.*.product_id' => 'required|integer',
+            'items.*.order_item_quantity' => 'required|integer|min:0',
             'items.*.order_item_name' => 'required|string',
             'items.*.order_item_type' => 'required|string',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'result' => 'failed',
+            'detail' => $validator->errors(),
+        ], 400));
     }
 }

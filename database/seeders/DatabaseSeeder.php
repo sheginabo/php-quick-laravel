@@ -6,6 +6,7 @@ use App\Models\BnbOrder;
 use App\Models\Bnb;
 use App\Models\BnbRoom;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -39,5 +40,8 @@ class DatabaseSeeder extends Seeder
                 ]);
             });
         });
+
+        // Create Fake Product
+        Product::factory(3)->create();
     }
 }
