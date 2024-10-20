@@ -5,7 +5,7 @@ namespace App\Services;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
-class BnbOrderService
+class OrderService
 {
     public function transferOrder(array $input): array
     {

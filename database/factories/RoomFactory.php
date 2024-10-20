@@ -2,16 +2,16 @@
 
 namespace Database\Factories;
 
-use App\Models\BnbRoom;
+use App\Models\Room;
 use App\Models\Bnb;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\BnbRoom>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Room>
  */
-class BnbRoomFactory extends Factory
+class RoomFactory extends Factory
 {
-    protected $model = BnbRoom::class;
+    protected $model = Room::class;
     /**
      * Define the model's default state.
      *

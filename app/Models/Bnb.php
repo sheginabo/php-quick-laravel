@@ -15,6 +15,6 @@ class Bnb extends Model
 
     public function rooms()
     {
-        return $this->hasMany(BnbRoom::class);
+        return $this->hasMany(Room::class);
     }
 }
