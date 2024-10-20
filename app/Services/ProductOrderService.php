@@ -5,11 +5,12 @@ namespace App\Services;
 use App\Repositories\ProductOrderItemRepository;
 use App\Repositories\ProductOrderRepository;
 use App\Repositories\ProductRepository;
+use App\Services\Interfaces\ProductOrderServiceInterface;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
-class ProductOrderService
+class ProductOrderService implements ProductOrderServiceInterface
 {
     // Define constants for order statuses
     const ORDER_STATUS_CANCELLED = -1;

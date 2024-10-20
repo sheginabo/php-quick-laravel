@@ -3,9 +3,9 @@
 namespace App\Services\Interfaces;
 interface ProductOrderServiceInterface
 {
-    public function getAllOrders(): string;
-    public function createOrder(array $input): string;
-    public function getOrderById(array $input): string;
-    public function updateOrder(array $input): string;
-    public function deleteOrder(array $input): string;
+    public function getOrdersByUserId();
+    public function createOrder(array $data);
+    public function updateOrder(int $id, array $data);
+    public function disableOrder(int $id);
+    public function getOrderById(int $id);
 }

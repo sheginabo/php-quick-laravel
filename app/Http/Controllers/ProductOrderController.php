@@ -9,6 +9,7 @@ use App\Http\Resources\ProductOrderResourceCollection;
 use App\Services\ProductOrderService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
+use App\Services\Interfaces\ProductOrderServiceInterface;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class ProductOrderController extends Controller
@@ -16,7 +17,7 @@ class ProductOrderController extends Controller
     use AuthorizesRequests;
     protected ProductOrderService $productOrderService;
 
-    public function __construct(ProductOrderService $productOrderService)
+    public function __construct(ProductOrderServiceInterface $productOrderService)
     {
         $this->productOrderService = $productOrderService;
     }
