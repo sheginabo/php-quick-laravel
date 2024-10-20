@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Room extends Model
+class BnbOrder extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'bnb_id',
-        'name',
+        'room_id',
+        'currency',
+        'amount',
+        'check_in_date',
+        'check_out_date',
+        'created_at',
     ];
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
-    }
 }

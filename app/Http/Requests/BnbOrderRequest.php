@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class OrderRequest extends FormRequest
+class BnbOrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,14 +28,6 @@ class OrderRequest extends FormRequest
             'name' => [
                 'required',
                 'regex:/^[A-Z][a-z]*(\s[A-Z][a-z]*)*$/',
-                function ($attribute, $value, $fail) {
-                    $words = preg_split('/\s+/', trim($value));
-                    foreach ($words as $word) {
-                        if (ucfirst($word) !== $word) {
-                            $fail('Name is not capitalized');
-                        }
-                    }
-                },
             ],
             'address.city' => 'required|string',
             'address.district' => 'required|string',
@@ -51,7 +43,7 @@ class OrderRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.regex' => 'Name contains non-English characters',
+            'name.regex' => 'Name contains non-English characters or is not capitalized',
             'currency.in' => 'Currency format is wrong',
             'price.numeric' => 'Price format is wrong',
             'price.max' => 'Price is over 2000',

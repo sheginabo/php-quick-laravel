@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\OrderResource;
+use App\Http\Resources\BnbOrderResource;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use App\Services\OrderService;
-use App\Http\Requests\OrderRequest;
+use App\Services\BnbOrderService;
+use App\Http\Requests\BnbOrderRequest;
 use Illuminate\Http\JsonResponse;
 
 
-class OrderController extends Controller
+class BnbOrderController extends Controller
 {
     use ValidatesRequests;
-    protected OrderService $orderService;
+    protected BnbOrderService $orderService;
 
-    public function __construct(OrderService $orderService)
+    public function __construct(BnbOrderService $orderService)
     {
         $this->orderService = $orderService;
     }
-    public function transferOrder(OrderRequest $request): JsonResponse
+    public function transferOrder(BnbOrderRequest $request): JsonResponse
     {
         $response = [
             'result' => 'failed',
@@ -29,7 +29,7 @@ class OrderController extends Controller
         $transferredOrder = $this->orderService->transferOrder($request->validated());
 
         $response['result'] = 'success';
-        $response['transferredOrder'] = new OrderResource($transferredOrder);
+        $response['transferredOrder'] = new BnbOrderResource($transferredOrder);
 
         return response()->json($response);
     }
