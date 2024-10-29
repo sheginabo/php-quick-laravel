@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DailySentenceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ToolController;
 use App\Http\Controllers\BnbOrderController;
@@ -31,4 +32,7 @@ Route::middleware('api')->group(function () {
             });
         });
     });
+
+    // 每日一句
+    Route::get('/daily-sentence/{type?}', [DailySentenceController::class, 'getSentence']);
 });

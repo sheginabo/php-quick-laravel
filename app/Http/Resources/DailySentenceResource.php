@@ -5,9 +5,8 @@ namespace App\Http\Resources;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Collection;
 
-class ProductOrderResource extends JsonResource
+class DailySentenceResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
@@ -25,20 +24,9 @@ class ProductOrderResource extends JsonResource
             ];
         }
 
-
-        if (is_object($this->resource)) {
-            return [
-                'order_number' => $this->order_number,
-                'billing_email' => $this->billing_email,
-            ];
-        }
-
         return [
             'result' => 'success',
-            'order' => [
-                'order_number' => $this->order_number,
-                'billing_email' => $this->billing_email,
-            ],
+            'message' => $this->resource
         ];
     }
 

@@ -2,9 +2,11 @@
 
 namespace App\Services;
 
+use Exception;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\Response;
+use Illuminate\Support\Facades\Log;
 
 class ApiHandler
 {
@@ -41,7 +43,7 @@ class ApiHandler
      *
      * @param Response $response
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     protected function handleResponse(Response $response): mixed
     {
@@ -49,6 +51,13 @@ class ApiHandler
             return $response->json() ?? $response->body();
         }
 
-        throw new \Exception('API request failed: ' . $response->status());
+        //throw new Exception('API request failed: ' . $response->status());
+        Log::error('[ApiHandler_handleResponse] unexpected statusCode: ' . $response->status() . ', response: ' . $response->body());
+        return [
+            'error' => [
+                'statusCode' => $response->status(),
+                'details' => $response->body()
+            ]
+        ];
     }
 }
