@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\DailySentence;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

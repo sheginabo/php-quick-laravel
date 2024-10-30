@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Factories\DailySentenceFactory;
-use App\Http\Resources\DailySentenceResource;
+use App\Http\Resources\DailySentence\DailySentenceResource;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Throwable;
