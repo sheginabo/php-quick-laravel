@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\Http;
 
 class ItsthisforthatService extends ApiHandler implements DailySentenceInterface
 {
-    //private const API_URL = 'http://itsthisforthat.com/api.php';
-    private const API_URL = 'http://itsthisforthat.com/api.php?text=';
+    private const API_URL = 'http://itsthisforthat.com/api.php';
 
     /**
      * @throws ConnectionException
