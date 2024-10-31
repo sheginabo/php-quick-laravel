@@ -32,7 +32,12 @@ To run the project locally for debugging purposes, follow these steps:
     build_deploy.sh
     ```
    - 建立一組 Container 將開發完成的專案放進 image (丟 ECR 或是 DockerHub 之前本地檢查品質)
-4. **位於專案根目錄執行 build_deploy.sh 驗證包成 image**
+4. **位於專案根目錄執行 build_local.sh 或是 build_deploy.sh**
+    確認 docker-compose.yml 內 app 使用 local 註解區塊
+    ```bash
+    ./docker/build_local.sh
+    ```
+    確認 docker-compose.yml 內 app 使用 local 註解區塊
     ```bash
     ./docker/build_deploy.sh
     ```
